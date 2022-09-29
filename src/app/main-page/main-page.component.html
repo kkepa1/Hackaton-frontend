@@ -7,8 +7,11 @@
         <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Dodaj opis ciasta..."></textarea>
       </div>
     </div>
-    <input type='file' (change)="readURL($event);" />
-    <button type="button" class="btn btn-primary">Post</button>
+    <div class="button-wrap">
+      <label class="button" for="inputP"> Upload! </label>
+      <input id="inputP" type='file' (change)="readURL($event);"/>
+    </div>
+    <button type="button" class="btn btn-primary" >Post</button>
   </div>
 </form>
 
