@@ -8,7 +8,7 @@ import {FormGroup} from "@angular/forms";
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthenticationService {
 
   private ROOT_URL = 'http://localhost:8080';
   private http: HttpClient;
@@ -25,6 +25,17 @@ export class LoginService {
       username: form.value["username"],
       password: Md5.hashStr(JSON.stringify(form.value["password"]))
     });
-    return this.http.post<User>(`${this.ROOT_URL}/login`, body, this.httpOptions);  }
+    return this.http.post<User>(`${this.ROOT_URL}/login`, body, this.httpOptions);
+  }
+
+  signUp(form: FormGroup) {
+    const body = JSON.stringify({
+      firstName: form.value["firstName"],
+      username: form.value["username"],
+      email: form.value["email"],
+      password: Md5.hashStr(JSON.stringify(form.value["password"]))
+    });
+    return this.http.post(`${this.ROOT_URL}/register`, body, this.httpOptions);
+  }
 
 }
