@@ -69,14 +69,13 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    console.log(JSON.stringify(this.form.value, null, 2));
-    this.authenticationService.signIn(this.form).subscribe(user => {
+    this.authenticationService.signUp(this.form).subscribe(user => {
       LocalService.saveData('user', JSON.stringify(user));
       Swal.fire(
         'Zarejstrowano!',
         'Rejstracja przebiegła poprawnie, zaloguj się!',
         'success'
-      ).then(() => this._router.navigate(['main-page']));
+      ).then(() => this._router.navigate(['login']));
     }, () => {
       Swal.fire({
         icon: 'error',
