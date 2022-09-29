@@ -3,6 +3,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import Validation from "./validation";
 import {AuthenticationService} from "../services/authentication.service";
+import {LocalService} from "../services/local.service";
+import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-register',
@@ -20,7 +23,10 @@ export class RegisterComponent implements OnInit {
   });
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private authenticationService: AuthenticationService) {}
+  constructor(private formBuilder: FormBuilder,
+              private authenticationService: AuthenticationService,
+              private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -64,9 +70,20 @@ export class RegisterComponent implements OnInit {
     }
 
     console.log(JSON.stringify(this.form.value, null, 2));
-    // this.authenticationService.signIn(this.form).subscribe(() => {
-    //
-    // })
+    this.authenticationService.signIn(this.form).subscribe(user => {
+      LocalService.saveData('user', JSON.stringify(user));
+      Swal.fire(
+        'Zarejstrowano!',
+        'Rejstracja przebiegła poprawnie, zaloguj się!',
+        'success'
+      ).then(() => this._router.navigate(['main-page']));
+    }, () => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Coś poszło nie tak, spróbuj ponownie!'
+      })
+    })
   }
 
   onReset(): void {

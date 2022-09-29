@@ -8,10 +8,10 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  {
-    path: 'user-profile',
-    component: UserProfileComponent,
-  }];
+  { path: 'user-profile', component: UserProfileComponent },
+  // this has to be always on the bottom
+  {path: '**', redirectTo: 'login'}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
