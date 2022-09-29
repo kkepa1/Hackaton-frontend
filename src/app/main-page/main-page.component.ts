@@ -8,18 +8,20 @@ import { Component } from "@angular/core";
 
 export class MainPageComponent{
   constructor(){
-
   }
-  url: any;
 
-  onFileSelected(event: any){
+  imageSrc: string | ArrayBuffer | null = '';
 
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (_event) =>{
-      this.url = reader.result;
+  readURL(event: Event): void {
+    // @ts-ignore
+    if (event.target.files && event.target.files[0]) {
+      // @ts-ignore
+      const file = event.target.files[0];
 
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.readAsDataURL(file);
     }
-
   }
 }

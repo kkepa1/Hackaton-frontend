@@ -1,10 +1,14 @@
-<form>
+<form class="form">
   <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
+    <img id="blah" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" />
     <div class="card-body">
-      <input>
+      <div class="form-group shadow-textarea">
+        <label for="exampleFormControlTextarea6">Dodaj ciasto</label>
+        <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Dodaj opis ciasta..."></textarea>
+      </div>
     </div>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <input type='file' (change)="readURL($event);" />
+    <button type="button" class="btn btn-primary">Post</button>
   </div>
 </form>
 
