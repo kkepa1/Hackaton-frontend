@@ -4,12 +4,12 @@
       <label>Imię</label>
       <input
         type="text"
-        formControlName="fullname"
+        formControlName="firstName"
         class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }"
+        [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
       />
-      <div *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">
-        <div *ngIf="f['fullname'].errors['required']">Imię jest wymagane</div>
+      <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+        <div *ngIf="f['firstName'].errors['required']">Imię jest wymagane</div>
       </div>
     </div>
 

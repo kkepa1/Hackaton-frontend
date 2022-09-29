@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { AbstractControl, FormBuilder } from '@angular/forms';
 import Validation from "./validation";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   });
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -63,6 +64,9 @@ export class RegisterComponent implements OnInit {
     }
 
     console.log(JSON.stringify(this.form.value, null, 2));
+    // this.authenticationService.signIn(this.form).subscribe(() => {
+    //
+    // })
   }
 
   onReset(): void {
