@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {LoginService} from "../services/login.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   });
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -50,6 +51,9 @@ export class LoginComponent implements OnInit {
     }
 
     console.log(JSON.stringify(this.form.value, null, 2));
+    this.loginService.signIn(this.form).subscribe(() => {
+
+    })
   }
 
   onReset(): void {
