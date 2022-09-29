@@ -7,21 +7,17 @@
   <div class="py-2" style="column-gap: 2rem">
     <div class="row py-2" style="column-gap: 2rem">
       <div class="col-md-5">
-        <label for="firstname">Imie</label>
-        <input type="text" class="bg-light form-control" placeholder="Anna">
+        <label>Nazwa użytkownika</label>
+        <input type="text" class="bg-light form-control" placeholder="Anna" [(ngModel)]="inputUsername">
       </div>
       <div class="col-md-5 pt-md-0 pt-3">
-        <label for="lastname">Nazwisko</label>
-        <input type="text" class="bg-light form-control" placeholder="Nowak">
+        <label>Adres email</label>
+        <input type="text" class="bg-light form-control" placeholder="anna_nowak@email.com" [(ngModel)]="inputEmail">
       </div>
     </div>
     <div class="row py-2" style="column-gap: 2rem">
-      <div class="col-md-5">
-        <label for="email">Adres email</label>
-        <input type="text" class="bg-light form-control" placeholder="anna_nowak@email.com">
-      </div>
-      <div class="col-md-5 pt-md-0 pt-3" style="margin-top: 0.5rem">
-        <label for="city">Dział</label>
+      <div class="col-md-5" style="margin-top: 0.5rem">
+        <label>Dział</label>
         <div class="arrow">
           <select name="city" class="bg-light">
             <option value="wroclaw" selected>Wrocław</option>
@@ -29,27 +25,31 @@
           </select>
         </div>
       </div>
-      <div class="row py-2" style="column-gap: 2rem">
-        <div class="col-md-5">
-          <label for="password">Stare hasło</label>
-          <input type="text" class="bg-light form-control" placeholder="********">
-        </div>
-        <div class="col-md-5 pt-md-0 pt-3">
-          <label for="new_password">Nowe hasło</label>
-          <input type="text" class="bg-light form-control" placeholder="********">
-        </div>
-      </div>
     </div>
     <div class="py-3 pb-4 border-bottom ">
       <button class="btn border button" style="padding: 0.2rem 0.5rem">Zapisz zmiany</button>
-      <button class="btn border button " style="padding: 0.2rem 0.5rem">Anuluj</button>
+      <button class="btn border button " style="padding: 0.2rem 0.5rem" (click)="cancel()">Anuluj</button>
     </div>
-    <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-      <div>
-        <b>Usuń konto</b>
+    <div class="row py-2" style="column-gap: 2rem">
+      <div class="col-md-5">
+        <label>Stare hasło</label>
+        <input type="text" class="bg-light form-control" placeholder="********">
       </div>
-      <div class="ml-auto">
-        <button class="btn danger" style="padding: 0.2rem 0.5rem">Usuń</button>
+      <div class="col-md-5 pt-md-0 pt-3">
+        <label>Nowe hasło</label>
+        <input type="text" class="bg-light form-control" placeholder="********">
       </div>
     </div>
+    <div class="py-3 pb-4 border-bottom ">
+      <button class="btn border button" style="padding: 0.2rem 0.5rem">Zmień hasło</button>
+    </div>
+  </div>
+  <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+    <div>
+      <b>Usuń konto</b>
+    </div>
+    <div class="ml-auto">
+      <button class="btn danger" style="padding: 0.2rem 0.5rem">Usuń</button>
+    </div>
+  </div>
 </div>
