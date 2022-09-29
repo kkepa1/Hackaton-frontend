@@ -1,0 +1,116 @@
+<div class="register-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Imię</label>
+      <input
+        type="text"
+        formControlName="fullname"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }"
+      />
+      <div *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">
+        <div *ngIf="f['fullname'].errors['required']">Imię jest wymagane</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Nazwa użytkownika</label>
+      <input
+        type="text"
+        formControlName="username"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+      />
+      <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+        <div *ngIf="f['username'].errors['required']">Nazwa użytkownika jest wymagana</div>
+        <div *ngIf="f['username'].errors['minlength']">
+          Nazwa użytkownika musi mieć przynajmniej 6 znaków
+        </div>
+        <div *ngIf="f['username'].errors['maxlength']">
+          Nazwa użytkownika nie może mieć więcej niż 20 znaków
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        type="text"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+      />
+      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="f['email'].errors['required']">Email jest wymagany</div>
+        <div *ngIf="f['email'].errors['email']">Email jest nieprawidłowy</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Hasło</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+      />
+      <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+        <div *ngIf="f['password'].errors['required']">Hasło jest wymagane</div>
+        <div *ngIf="f['password'].errors['minlength']">
+          Hasło musi mieć przynajmniej 6 znaków
+        </div>
+        <div *ngIf="f['password'].errors['maxlength']">
+          Hasło nie może mieć więcej niż 20 znaków
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Potwierdź hasło</label>
+      <input
+        type="password"
+        formControlName="confirmPassword"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+      />
+      <div
+        *ngIf="submitted && f['confirmPassword'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="f['confirmPassword'].errors['required']">
+          Potwierdzenie hasła jest wymagane
+        </div>
+        <div *ngIf="f['confirmPassword'].errors['matching']">
+          Hasła nie są takie same
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group form-check">
+      <input
+        type="checkbox"
+        formControlName="acceptTerms"
+        class="form-check-input"
+        [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }"
+      />
+      <label class="form-check-label"
+      >Przeczytałem i akceptuję warunki</label
+      >
+      <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">
+        Akceptacja warunków jest wymagane
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Zarejstruj się</button>
+      <button
+        type="button"
+        (click)="onReset()"
+        class="btn btn-warning float-right"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+  <span>Jesteś już członkiem? <a [routerLink]="['../login']">Zaloguj się</a></span>
+</div>
