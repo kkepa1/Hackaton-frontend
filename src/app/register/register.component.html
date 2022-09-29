@@ -1,7 +1,7 @@
 <div class="register-form">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label>Full Name</label>
+      <label>Imię</label>
       <input
         type="text"
         formControlName="fullname"
@@ -9,12 +9,12 @@
         [ngClass]="{ 'is-invalid': submitted && f['fullname'].errors }"
       />
       <div *ngIf="submitted && f['fullname'].errors" class="invalid-feedback">
-        <div *ngIf="f['fullname'].errors['required']">Fullname is required</div>
+        <div *ngIf="f['fullname'].errors['required']">Imię jest wymagane</div>
       </div>
     </div>
 
     <div class="form-group">
-      <label>Username</label>
+      <label>Nazwa użytkownika</label>
       <input
         type="text"
         formControlName="username"
@@ -22,12 +22,12 @@
         [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
       />
       <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-        <div *ngIf="f['username'].errors['required']">Username is required</div>
+        <div *ngIf="f['username'].errors['required']">Nazwa użytkownika jest wymagana</div>
         <div *ngIf="f['username'].errors['minlength']">
-          Username must be at least 6 characters
+          Nazwa użytkownika musi mieć przynajmniej 6 znaków
         </div>
         <div *ngIf="f['username'].errors['maxlength']">
-          Username must not exceed 20 characters
+          Nazwa użytkownika nie może mieć więcej niż 20 znaków
         </div>
       </div>
     </div>
@@ -41,13 +41,13 @@
         [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
       />
       <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-        <div *ngIf="f['email'].errors['required']">Email is required</div>
-        <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+        <div *ngIf="f['email'].errors['required']">Email jest wymagany</div>
+        <div *ngIf="f['email'].errors['email']">Email jest nieprawidłowy</div>
       </div>
     </div>
 
     <div class="form-group">
-      <label>Password</label>
+      <label>Hasło</label>
       <input
         type="password"
         formControlName="password"
@@ -55,18 +55,18 @@
         [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
       />
       <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-        <div *ngIf="f['password'].errors['required']">Password is required</div>
+        <div *ngIf="f['password'].errors['required']">Hasło jest wymagane</div>
         <div *ngIf="f['password'].errors['minlength']">
-          Password must be at least 6 characters
+          Hasło musi mieć przynajmniej 6 znaków
         </div>
         <div *ngIf="f['password'].errors['maxlength']">
-          Username must not exceed 40 characters
+          Hasło nie może mieć więcej niż 20 znaków
         </div>
       </div>
     </div>
 
     <div class="form-group">
-      <label>Confirm Password</label>
+      <label>Potwierdź hasło</label>
       <input
         type="password"
         formControlName="confirmPassword"
@@ -78,10 +78,10 @@
         class="invalid-feedback"
       >
         <div *ngIf="f['confirmPassword'].errors['required']">
-          Confirm Password is required
+          Potwierdzenie hasła jest wymagane
         </div>
         <div *ngIf="f['confirmPassword'].errors['matching']">
-          Confirm Password does not match
+          Hasła nie są takie same
         </div>
       </div>
     </div>
@@ -94,15 +94,15 @@
         [ngClass]="{ 'is-invalid': submitted && f['acceptTerms'].errors }"
       />
       <label class="form-check-label"
-      >I have read and agree to the Terms</label
+      >Przeczytałem i akceptuję warunki</label
       >
       <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">
-        Accept Terms is required
+        Akceptacja warunków jest wymagane
       </div>
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Register</button>
+      <button type="submit" class="btn btn-primary">Zarejstruj</button>
       <button
         type="button"
         (click)="onReset()"
