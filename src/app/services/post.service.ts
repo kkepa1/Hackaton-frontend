@@ -9,10 +9,15 @@ import {LocalService} from "./local.service";
 export class PostService {
 
   private ROOT_URL = 'http://localhost:8080/api/v1/users';
+  private ROOT_URL_POST = 'http://localhost:8080/api/v1/posts/';
   private http: HttpClient;
 
   constructor(http: HttpClient) {
     this.http = http;
+  }
+
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.ROOT_URL_POST + "all")
   }
 
   addPost(post: Post) {
