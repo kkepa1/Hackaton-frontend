@@ -1,0 +1,19 @@
+<form class="form">
+  <div class="card" style="width: 18rem;">
+    <img id="blah" [src]="imageSrc || null" alt="your image" />
+    <div class="card-body">
+      <div class="form-group shadow-textarea">
+        <label for="exampleFormControlTextarea6">Dodaj ciasto</label>
+        <textarea class="form-control z-depth-1"
+                  id="exampleFormControlTextarea6"
+                  rows="3" placeholder="Dodaj opis ciasta..."
+                  name="description"
+                  [(ngModel)]="description"
+        ></textarea>
+      </div>
+    </div>
+    <input type='file' (change)="readURL($event)"/>
+    <button type="button" class="btn btn-primary" (click)="savePost()">Post</button>
+  </div>
+</form>
+

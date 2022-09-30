@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import {AuthenticationService} from "../services/authentication.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {LocalService} from "../services/local.service";
 
 @Component({
   selector: 'app-login',
@@ -55,14 +56,15 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.authenticationService.signIn(this.form).subscribe(() => {
-      this._router.navigate(['main-page']);
-    }, () => {
+    this.authenticationService.signIn(this.form).subscribe(user => {
+      LocalService.saveData('user', JSON.stringify(user));
+      this._router.navigate(['main-page'])
+    }, error => {
       Swal.fire({
         icon: 'error',
-        title: 'Podana nazwa użytkownika lub hasło są niepoprawne!',
+        title: 'Nieprawidłowa nazwa użytkownika lub hasło!',
         text: 'Spróbuj ponownie!'
-      });
+      })
     })
   }
 
