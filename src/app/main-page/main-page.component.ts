@@ -2,7 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import {Post} from "../models/post";
 import {LocalService} from "../services/local.service";
 import {PostService} from "../services/post.service";
-import {Comments} from "../models/comments";
 
 @Component({
   selector: 'app-main-page',
@@ -41,12 +40,15 @@ export class MainPageComponent implements OnInit {
     // @ts-ignore
     if (event.target.files && event.target.files[0]) {
       // @ts-ignore
-      this.file = event.target.files[0];
-
-      // this.data.append('file', this.file);
+      let file = event.target.files[0];
+      this.file = file;
 
       const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.onload = e => {
+        this.imageSrc = reader.result;
+        this.data.append('file', file);
+      }
 
       // @ts-ignore
       reader.readAsDataURL(file);
@@ -54,16 +56,14 @@ export class MainPageComponent implements OnInit {
   }
 
   savePost() {
-    let post: Post = {
-      username: LocalService.getLoggedUser(),
-      description: this.description,
-      cakeImageSource: this.file,
-      dateOfPublication: '30.09.2022',
-      likes: 0,
-      comments: 0,
-      listOfComments: []
-    }
-    this.postService.addPost(post).subscribe(res => {
+    const form = new FormData()
+    form.append('description', this.description);
+    // @ts-ignore
+    form.append('image', this.file?.slice());
+    // @ts-ignore
+
+    this.postService.addPost(form)
+      .subscribe(res => {
       console.log(res)
     });
   }
