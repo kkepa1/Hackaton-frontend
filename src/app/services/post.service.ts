@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Post} from "../models/post";
 import {LocalService} from "./local.service";
+import {Observable} from "rxjs";
+import {Comments} from "../models/comments";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,10 @@ export class PostService {
 
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.ROOT_URL_POST + "all")
+  }
+
+  getAllComments(): Observable<Comments[]> {
+    return this.http.get<Comments[]>(this.ROOT_URL_POST + `/comments/all`)
   }
 
   addPost(post: Post) {

@@ -1,28 +1,28 @@
-<div class="page-content page-container" id="page-content"  *ngFor="let n of posts | async">
+<div class="page-content page-container" id="page-content"  *ngFor="let n of postsObs | async">
   <div class="padding">
     <div class="row container d-flex justify-content-center">
       <div class="col-md-6">
         <div class="box box-widget">
           <div class="box-header with-border">
             <div class="user-block">
-              <span class="username"><p>{{n.username}}</p></span>
-              <span class="description">{{n.dateOfPublication}}</span>
+              <span class="username"><p>{{n.user.username}}</p></span>
+              <span class="description">{{n.localDate}}</span>
             </div>
           </div>
           <div class="box-body">
-            <img class="img-responsive pad" [src]="n.cakeImageSource">
+            <img class="img-responsive pad" [src]="n.image">
             <p>{{n.description}}</p>
-            <button type="button" class="btn btn-default btn-xs" (click)="likePost()">
+            <button type="button" class="btn btn-default btn-xs" >
               <img src="assets/heart.png" height="16px"> </button>
-            <span class="pull-right text-muted">polubienia: {{n.likes}} - komentarze: {{n.comments}}</span>
+            <span class="pull-right text-muted">polubienia: {{n.likes}}</span>
           </div>
           <div class="box-footer box-comments">
-<!--            <div class="box-comment" *ngFor="let m of n.listOfComments | async">-->
-<!--              <div class="comment-text">-->
-<!--                <span class="username"> {{m.commentUser}}-->
-<!--                  <span class="text-muted pull-right">{{m.commentDate}}</span>-->
-<!--                </span> {{m.commentText}}</div>-->
-<!--            </div>-->
+            <div class="box-comment" *ngFor="let m of comments | async">
+              <div class="comment-text">
+                <span class="username"> {{m.user.username}}
+                  <span class="text-muted pull-right">{{m.commentDate}}</span>
+                </span> {{m.content}}</div>
+            </div>
           </div>
           <div class="box-footer">
             <form action="#" method="post">
@@ -30,7 +30,7 @@
                 <input type="text" class="form-control input-sm" placeholder="Skomentuj">
               </div>
               <div class="commentbutton" >
-                <button type="button" class="btn btn-default" (click)="addComment()">Skomentuj</button>
+                <button type="button" class="btn btn-default">Skomentuj</button>
               </div>
             </form>
           </div>

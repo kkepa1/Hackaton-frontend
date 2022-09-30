@@ -1,11 +1,11 @@
 import {Comments} from "./comments";
 
 export interface Post {
-  username: string
-  dateOfPublication: string
+  comments: Comments[]
   description: string
-  cakeImageSource: any
+  id: number
+  image: any
   likes: number
-  comments: number
-  listOfComments: Comments[]
+  localDate: any
+  user: any
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Post} from "../../models/post";
 import {LocalService} from "../../services/local.service";
 import {Observable} from "rxjs";
+import {PostService} from "../../services/post.service";
+import {Comments} from "../../models/comments";
 
 @Component({
   selector: 'app-cake',
@@ -10,61 +12,14 @@ import {Observable} from "rxjs";
 })
 export class CakeComponent implements OnInit {
 
-  public posts: Observable<Post[]> = this.localService.fetchPosts()
+  public postsObs?: Observable<Post[]>
+  public comments?: Observable<Comments[]>
 
-  // public posts: Post[] = [{
-  //   username: 'username',
-  //   description: 'PLACEK DROŻDŻOWY ZE ŚLIWKAMI I CZEKOLADĄ',
-  //   cakeImageSource: "../../assets/images/ciasto1.jpg",
-  //   likes: 4,
-  //   comments: 1,
-  //   dateOfPublication: '30.09.2022',
-  //   listOfComments: [
-  //     {
-  //      commentUser: 'superuser123',
-  //      commentText: 'to nawet nie jest on',
-  //      commentDate: '30.09.2022'
-  //     },]
-  // },
-  //   {
-  //     username: 'inny_użytkownik',
-  //     description: 'ciasto dobre',
-  //     cakeImageSource: "../../assets/images/ciasto2.jpg",
-  //     likes: 10,
-  //     comments: 2,
-  //     dateOfPublication: '29.09.2022',
-  //     listOfComments: [
-  //       {
-  //         commentUser: 'superuser123',
-  //         commentText: 'dobre',
-  //         commentDate: '29.09.2022'
-  //       },
-  //       {
-  //         commentUser: 'username',
-  //         commentText: 'bardzo dobre',
-  //         commentDate: '30.09.2022'
-  //       },
-  //
-  // ]}
-  //   ]
-
-  constructor( public localService: LocalService) { }
+  constructor( public localService: LocalService, public postService: PostService) { }
 
   ngOnInit(): void {
-  }
-
-  likePost(): void{
-    // this.posts[0].likes = 5
-    // this.posts[1].likes = 11
-  }
-  addComment(): void{
-    // this.posts[0].comments =+ 1
-    // this.posts[0].listOfComments.push(
-    //   {commentUser: LocalService.getLoggedUser(),
-    //     commentDate: '30.09.2022',
-    //     commentText: this.inputComment}
-    // )
-    // // this.inputComment = ''
-    // console.log(this.inputComment)
+    this.postsObs = this.postService.getAllPosts()
+    this.comments = this.postService.getAllComments()
+    // this.comments.subscribe(res => console.log(res));
   }
 }

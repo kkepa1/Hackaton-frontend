@@ -1,5 +1,7 @@
+import {User} from "./user";
+
 export interface Comments {
-  commentUser: string
-  commentText: any
+  user: User
+  content: any
   commentDate: string
 }

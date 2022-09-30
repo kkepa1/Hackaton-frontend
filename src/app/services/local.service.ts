@@ -16,10 +16,6 @@ export class LocalService {
     return this.http.get<Comments[]>("localhost:8080/api/v1/comments/")
   }
 
-  fetchPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>("localhost:8080/api/v1/posts/all")
-  }
-
   public static saveData(key: string, value: string) {
     localStorage.setItem(key, value);
   }

@@ -20,7 +20,8 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
   }
   submitChanges(): void{
-    this.cancel()
+    this.username = this.inputUsername
+    // this.cancel()
   }
   changePassword(): void{
   }
