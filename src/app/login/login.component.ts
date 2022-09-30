@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../services/authentication.service";
 import {Router} from "@angular/router";
+import Swal from "sweetalert2";
+import {LocalService} from "../services/local.service";
 
 @Component({
   selector: 'app-login',
@@ -54,9 +56,15 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    console.log(JSON.stringify(this.form.value, null, 2));
-    this.authenticationService.signIn(this.form).subscribe(() => {
-      // Swal.f
+    this.authenticationService.signIn(this.form).subscribe(user => {
+      LocalService.saveData('user', JSON.stringify(user));
+      this._router.navigate(['main-page'])
+    }, error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Nieprawidłowa nazwa użytkownika lub hasło!',
+        text: 'Spróbuj ponownie!'
+      })
     })
   }
 

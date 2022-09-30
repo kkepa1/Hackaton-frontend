@@ -10,7 +10,7 @@ import {FormGroup} from "@angular/forms";
 })
 export class AuthenticationService {
 
-  private ROOT_URL = 'http://localhost:8080';
+  private ROOT_URL = 'http://localhost:8080/api/v1/users';
   private http: HttpClient;
   private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -25,7 +25,7 @@ export class AuthenticationService {
       username: form.value["username"],
       password: Md5.hashStr(JSON.stringify(form.value["password"]))
     });
-    return this.http.post<User>(`${this.ROOT_URL}/login`, body, this.httpOptions);
+    return this.http.post<User>(`${this.ROOT_URL}/login-user`, body, this.httpOptions);
   }
 
   signUp(form: FormGroup) {
@@ -35,7 +35,7 @@ export class AuthenticationService {
       email: form.value["email"],
       password: Md5.hashStr(JSON.stringify(form.value["password"]))
     });
-    return this.http.post(`${this.ROOT_URL}/register`, body, this.httpOptions);
+    return this.http.post(`${this.ROOT_URL}/register-user`, body, this.httpOptions);
   }
 
 }
