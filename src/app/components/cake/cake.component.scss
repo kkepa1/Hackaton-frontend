@@ -1,7 +1,6 @@
 @import "src/assets/variables";
 
 .container {
-  margin-bottom: 500px
 }
 
 .stretch-card > .card {
@@ -133,10 +132,7 @@ body {
 }
 
 .box-body {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-radius: 0 0 3px 3px;
   padding: 10px
 }
 
@@ -148,6 +144,11 @@ body {
   display: block;
   max-width: 100%;
   height: auto
+}
+.commentbutton{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px
 }
 
 p {

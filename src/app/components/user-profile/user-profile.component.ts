@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LocalService} from "../../services/local.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -10,11 +11,11 @@ export class UserProfileComponent implements OnInit {
   inputUsername = ''
   inputEmail = ''
 
-  constructor() { }
+  constructor( public localService: LocalService) { }
 
-  public firstname: string = "imie"
-  public username: string = "użytkownik123"
-  public email: string = "email@email.com"
+  public firstname: string = LocalService.getLoggedUser().firstname
+  public username: string = LocalService.getLoggedUser().username
+  public email: string = LocalService.getLoggedUser().email
 
   ngOnInit(): void {
   }

@@ -1,5 +1,5 @@
 export interface Comments {
   commentUser: string
-  commentText: string
+  commentText: any
   commentDate: string
 }
