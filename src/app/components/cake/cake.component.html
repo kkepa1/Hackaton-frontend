@@ -5,14 +5,14 @@
         <div class="box box-widget">
           <div class="box-header with-border">
             <div class="user-block">
-              <span class="username"><p>{{n.username}}</p></span>
-              <span class="description">{{n.dateOfPublication}}</span>
+              <span class="username"><p>{{n.user.username}}</p></span>
+              <span class="description">{{n.localDate}}</span>
             </div>
           </div>
           <div class="box-body">
-            <img class="img-responsive pad" [src]="n.cakeImageSource">
+            <img class="img-responsive pad" [src]="n.image">
             <p>{{n.description}}</p>
-            <button type="button" class="btn btn-default btn-xs" (click)="likePost()">
+            <button type="button" class="btn btn-default btn-xs" (click)="likePost(n.id)">
               <img src="assets/heart.png" height="16px"> </button>
             <span class="pull-right text-muted">polubienia: {{n.likes}} - komentarze: {{n.comments}}</span>
           </div>

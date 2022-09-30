@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Post} from "../models/post";
 import {LocalService} from "./local.service";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,10 @@ export class PostService {
   addPost(post: Post) {
     let userId = LocalService.getLoggedUser().id;
     return this.http.post(`${this.ROOT_URL}/${userId}/add-post`, post);
+  }
+
+  likePost(postId: number) {
+    // @ts-ignore
+    return this.http.put(`${this.ROOT_URL}/${postId}/update-post`);
   }
 }

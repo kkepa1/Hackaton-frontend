@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Post} from "../../models/post";
 import {LocalService} from "../../services/local.service";
 import {Observable} from "rxjs";
+import {PostService} from "../../services/post.service";
 
 @Component({
   selector: 'app-cake',
@@ -10,7 +11,7 @@ import {Observable} from "rxjs";
 })
 export class CakeComponent implements OnInit {
 
-  public posts: Observable<Post[]> = this.localService.fetchPosts()
+  public posts: Observable<Post[]> = this.postService.getAllPosts()
 
   // public posts: Post[] = [{
   //   username: 'username',
@@ -48,14 +49,14 @@ export class CakeComponent implements OnInit {
   // ]}
   //   ]
 
-  constructor( public localService: LocalService) { }
+  constructor( public postService: PostService) { }
 
   ngOnInit(): void {
+    this.posts.subscribe(res => console.log(res));
   }
 
-  likePost(): void{
-    // this.posts[0].likes = 5
-    // this.posts[1].likes = 11
+  likePost(id: number): void{
+    this.postService.likePost(id).subscribe(res => console.log(res));
   }
   addComment(): void{
     // this.posts[0].comments =+ 1

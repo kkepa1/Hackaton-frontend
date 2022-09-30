@@ -46,6 +46,7 @@ export class MainPageComponent implements OnInit {
       const reader = new FileReader();
 
       reader.onload = e => {
+        console.log(this.imageSrc);
         this.imageSrc = reader.result;
         this.data.append('file', file);
       }
@@ -59,7 +60,7 @@ export class MainPageComponent implements OnInit {
     const form = new FormData()
     form.append('description', this.description);
     // @ts-ignore
-    form.append('image', this.file?.slice());
+    form.append('image', this.file?.slice(), this.file?.name);
     // @ts-ignore
 
     this.postService.addPost(form)
