@@ -1,6 +1,11 @@
-import {User} from "./user";
+import {Comments} from "./comments";
 
 export interface Post {
-  description: string;
-  image?: File;
+  username: string
+  dateOfPublication: string
+  description: string
+  cakeImageSource: any
+  likes: number
+  comments: number
+  listOfComments: Comments[]
 }

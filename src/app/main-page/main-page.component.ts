@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import {Post} from "../models/post";
 import {LocalService} from "../services/local.service";
 import {PostService} from "../services/post.service";
+import {Comments} from "../models/comments";
 
 @Component({
   selector: 'app-main-page',
@@ -10,7 +11,7 @@ import {PostService} from "../services/post.service";
 })
 
 export class MainPageComponent{
-  constructor(private postService: PostService){
+  constructor(private postService: PostService, private localService: LocalService){
   }
 
   imageSrc: string | ArrayBuffer | null = '';
@@ -37,8 +38,13 @@ export class MainPageComponent{
 
   savePost() {
     let post: Post = {
+      username: LocalService.getLoggedUser(),
       description: this.description,
-      image: this.file
+      cakeImageSource: this.file,
+      dateOfPublication: '30.09.2022',
+      likes: 0,
+      comments: 0,
+      listOfComments: []
     }
     this.postService.addPost(post).subscribe(res => {
       console.log(res)
