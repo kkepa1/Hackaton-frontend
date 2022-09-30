@@ -1,8 +1,7 @@
-import { Component } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Post} from "../models/post";
 import {LocalService} from "../services/local.service";
 import {PostService} from "../services/post.service";
-import {Comments} from "../models/comments";
 
 @Component({
   selector: 'app-main-page',
@@ -10,8 +9,15 @@ import {Comments} from "../models/comments";
   styleUrls: ['./main-page.component.scss']
 })
 
-export class MainPageComponent{
-  constructor(private postService: PostService, private localService: LocalService){
+export class MainPageComponent implements OnInit {
+
+  private postService: PostService;
+  private localService: LocalService;
+  posts: Post[] = [];
+
+  constructor(postService: PostService, localService: LocalService){
+    this.postService = postService;
+    this.localService = localService;
   }
 
   imageSrc: string | ArrayBuffer | null = '';
@@ -19,17 +25,30 @@ export class MainPageComponent{
   description: string = '';
   file: File | undefined;
 
+  ngOnInit(): void {
+    this.getAllPosts();
+  }
+
+  getAllPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => {
+        this.posts = posts;
+      })
+  }
 
   readURL(event: Event): void {
     // @ts-ignore
     if (event.target.files && event.target.files[0]) {
       // @ts-ignore
-      this.file = event.target.files[0];
-
-      // this.data.append('file', this.file);
+      let file = event.target.files[0];
+      this.file = file;
 
       const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.onload = e => {
+        this.imageSrc = reader.result;
+        this.data.append('file', file);
+      }
 
       // @ts-ignore
       reader.readAsDataURL(file);
@@ -37,16 +56,14 @@ export class MainPageComponent{
   }
 
   savePost() {
-    let post: Post = {
-      username: LocalService.getLoggedUser(),
-      description: this.description,
-      cakeImageSource: this.file,
-      dateOfPublication: '30.09.2022',
-      likes: 0,
-      comments: 0,
-      listOfComments: []
-    }
-    this.postService.addPost(post).subscribe(res => {
+    const form = new FormData()
+    form.append('description', this.description);
+    // @ts-ignore
+    form.append('image', this.file?.slice());
+    // @ts-ignore
+
+    this.postService.addPost(form)
+      .subscribe(res => {
       console.log(res)
     });
   }
