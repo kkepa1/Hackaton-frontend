@@ -1,5 +1,5 @@
 <div class="hello_user" style="padding: 1rem 2rem">
-  <h1>Witaj {{username}}</h1>
+  <h1>Witaj {{firstname}}</h1>
 </div>
 
 <div class="wrapper">
@@ -8,11 +8,11 @@
     <div class="row py-2" style="column-gap: 2rem">
       <div class="col-md-5">
         <label>Nazwa użytkownika</label>
-        <input type="text" class="bg-light form-control" placeholder="Anna" [(ngModel)]="inputUsername">
+        <input type="text" class="bg-light form-control" placeholder={{username}} [(ngModel)]="inputUsername">
       </div>
       <div class="col-md-5 pt-md-0 pt-3">
         <label>Adres email</label>
-        <input type="text" class="bg-light form-control" placeholder="anna_nowak@email.com" [(ngModel)]="inputEmail">
+        <input type="text" class="bg-light form-control" placeholder={{email}} [(ngModel)]="inputEmail">
       </div>
     </div>
     <div class="row py-2" style="column-gap: 2rem">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="py-3 pb-4 border-bottom ">
-      <button class="btn border button" style="padding: 0.2rem 0.5rem">Zapisz zmiany</button>
+      <button class="btn border button" style="padding: 0.2rem 0.5rem" (click)="submitChanges()">Zapisz zmiany</button>
       <button class="btn border button " style="padding: 0.2rem 0.5rem" (click)="cancel()">Anuluj</button>
     </div>
     <div class="row py-2" style="column-gap: 2rem">
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="py-3 pb-4 border-bottom ">
-      <button class="btn border button" style="padding: 0.2rem 0.5rem">Zmień hasło</button>
+      <button class="btn border button" style="padding: 0.2rem 0.5rem" (click)="changePassword()" >Zmień hasło</button>
     </div>
   </div>
   <div class="d-sm-flex align-items-center pt-3" id="deactivate">

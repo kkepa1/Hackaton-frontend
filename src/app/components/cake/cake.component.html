@@ -1,0 +1,46 @@
+<div class="page-content page-container" id="page-content"  *ngFor="let n of posts">
+  <div class="padding">
+    <div class="row container d-flex justify-content-center">
+      <div class="col-md-6">
+        <div class="box box-widget">
+          <div class="box-header with-border">
+            <div class="user-block">
+              <span class="username"><p>{{n.username}}</p></span>
+              <span class="description">{{n.dateOfPublication}}</span>
+            </div>
+            <div class="box-tools"> <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-original-title="Mark as read"> <i class="fa fa-circle-o"></i></button>
+              <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body">
+            <img class="img-responsive pad" [src]="n.cakeImageSource">
+            <p>{{n.description}}</p>
+            <button type="button" class="btn btn-default btn-xs">
+              <img src="assets/heart.png" height="16px"> </button>
+            <span class="pull-right text-muted">polubienia: {{n.likes}} - komentarze: {{n.comments}}</span>
+          </div>
+          <div class="box-footer box-comments">
+            <div class="box-comment" *ngFor="let m of n.listOfComments">
+              <div class="comment-text">
+                <span class="username"> {{m.commentUser}}
+                  <span class="text-muted pull-right">{{m.commentDate}}</span>
+                </span> {{m.commentText}}</div>
+            </div>
+          </div>
+          <div class="box-footer">
+            <form action="#" method="post">
+              <div class="img-push">
+                <input type="text" class="form-control input-sm" placeholder="Skomentuj">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

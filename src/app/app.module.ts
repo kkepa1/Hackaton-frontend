@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from "@angular/forms";
 import { MainPageComponent } from './main-page/main-page.component';
+import {CakeComponent} from "./components/cake/cake.component";
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { MainPageComponent } from './main-page/main-page.component';
     LoginComponent,
     RegisterComponent,
     UserProfileComponent,
-    MainPageComponent
+    MainPageComponent,
+    CakeComponent
   ],
   imports: [
     BrowserModule,
