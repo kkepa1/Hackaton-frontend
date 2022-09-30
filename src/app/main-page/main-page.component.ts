@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Post} from "../models/post";
 import {LocalService} from "../services/local.service";
 import {PostService} from "../services/post.service";
@@ -10,8 +10,15 @@ import {Comments} from "../models/comments";
   styleUrls: ['./main-page.component.scss']
 })
 
-export class MainPageComponent{
-  constructor(private postService: PostService, private localService: LocalService){
+export class MainPageComponent implements OnInit {
+
+  private postService: PostService;
+  private localService: LocalService;
+  posts: Post[] = [];
+
+  constructor(postService: PostService, localService: LocalService){
+    this.postService = postService;
+    this.localService = localService;
   }
 
   imageSrc: string | ArrayBuffer | null = '';
@@ -19,6 +26,16 @@ export class MainPageComponent{
   description: string = '';
   file: File | undefined;
 
+  ngOnInit(): void {
+    this.getAllPosts();
+  }
+
+  getAllPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => {
+        this.posts = posts;
+      })
+  }
 
   readURL(event: Event): void {
     // @ts-ignore
