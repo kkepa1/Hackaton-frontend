@@ -3,7 +3,6 @@ import {Post} from "../../models/post";
 import {LocalService} from "../../services/local.service";
 import {Observable} from "rxjs";
 import {PostService} from "../../services/post.service";
-import {Comments} from "../../models/comments";
 
 @Component({
   selector: 'app-cake',
@@ -12,14 +11,25 @@ import {Comments} from "../../models/comments";
 })
 export class CakeComponent implements OnInit {
 
-  public postsObs?: Observable<Post[]>
-  public comments?: Observable<Comments[]>
+  public posts: Observable<Post[]> = this.postService.getAllPosts()
 
-  constructor( public localService: LocalService, public postService: PostService) { }
+  constructor( public postService: PostService) { }
 
   ngOnInit(): void {
-    this.postsObs = this.postService.getAllPosts()
-    this.comments = this.postService.getAllComments()
-    // this.comments.subscribe(res => console.log(res));
+    this.posts.subscribe(res => console.log(res));
+  }
+
+  likePost(id: number): void{
+    this.postService.likePost(id).subscribe(res => console.log(res));
+  }
+  addComment(postId: number): void{
+    // this.posts[0].comments =+ 1
+    // this.posts[0].listOfComments.push(
+    //   {commentUser: LocalService.getLoggedUser(),
+    //     commentDate: '30.09.2022',
+    //     commentText: this.inputComment}
+    // )
+    // // this.inputComment = ''
+    // console.log(this.inputComment)
   }
 }

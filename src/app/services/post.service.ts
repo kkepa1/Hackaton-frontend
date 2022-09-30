@@ -30,4 +30,9 @@ export class PostService {
     let userId = LocalService.getLoggedUser().id;
     return this.http.post(`${this.ROOT_URL}/${userId}/add-post`, post);
   }
+
+  likePost(postId: number) {
+    // @ts-ignore
+    return this.http.put(`${this.ROOT_URL}/${postId}/update-post`);
+  }
 }
