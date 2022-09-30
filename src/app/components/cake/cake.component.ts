@@ -20,6 +20,9 @@ export class CakeComponent implements OnInit {
   ngOnInit(): void {
     this.postsObs = this.postService.getAllPosts()
     this.comments = this.postService.getAllComments()
-    // this.comments.subscribe(res => console.log(res));
+  }
+
+  likePost(id: number): void{
+    this.postService.likePost(id).subscribe(res => console.log(res));
   }
 }
