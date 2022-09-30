@@ -1,11 +1,23 @@
 import {Injectable} from '@angular/core';
+import {Observable} from "rxjs";
+import {Comments} from "../models/comments";
+import {HttpClient} from "@angular/common/http";
+import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  fetchComments(): Observable<Comments[]> {
+    return this.http.get<Comments[]>("localhost:8080/api/v1/comments/")
+  }
+
+  fetchUser(): Observable<User> {
+    return this.http.get<User>("localhost:8080/api/.....")
+  }
 
   public static saveData(key: string, value: string) {
     localStorage.setItem(key, value);

@@ -12,12 +12,17 @@ export class UserProfileComponent implements OnInit {
 
   constructor() { }
 
-  public username: string = "Username"
+  public firstname: string = "imie"
+  public username: string = "użytkownik123"
+  public email: string = "email@email.com"
 
   ngOnInit(): void {
   }
-
-
+  submitChanges(): void{
+    this.cancel()
+  }
+  changePassword(): void{
+  }
   cancel(): void {
     this.inputUsername = ''
     this.inputEmail = ''
