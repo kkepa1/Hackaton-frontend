@@ -1,6 +1,4 @@
-import { Component } from "@angular/core";
-import {Post} from "../models/post";
-import {LocalService} from "../services/local.service";
+import {Component} from "@angular/core";
 import {PostService} from "../services/post.service";
 
 @Component({
@@ -23,12 +21,15 @@ export class MainPageComponent{
     // @ts-ignore
     if (event.target.files && event.target.files[0]) {
       // @ts-ignore
-      this.file = event.target.files[0];
-
-      // this.data.append('file', this.file);
+      let file = event.target.files[0];
+      this.file = file;
 
       const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.onload = e => {
+        this.imageSrc = reader.result;
+        this.data.append('file', file);
+      }
 
       // @ts-ignore
       reader.readAsDataURL(file);
@@ -36,11 +37,14 @@ export class MainPageComponent{
   }
 
   savePost() {
-    let post: Post = {
-      description: this.description,
-      image: this.file
-    }
-    this.postService.addPost(post).subscribe(res => {
+    const form = new FormData()
+    form.append('description', this.description);
+    // @ts-ignore
+    form.append('image', this.file?.slice());
+    // @ts-ignore
+
+    this.postService.addPost(form)
+      .subscribe(res => {
       console.log(res)
     });
   }
